@@ -31,7 +31,7 @@ async function run() {
 
         const db = client.db("assignment10");
         const billsCollection = db.collection("bills");
-        // const paymentsCollection = db.collection("payments");
+        const paymentsCollection = db.collection("payments");
         const usersCollection = db.collection("users");
 
         // USERS APIs
@@ -72,11 +72,11 @@ async function run() {
         });
 
         // Add payment
-        // app.post("/payments", async (req, res) => {
-        //     const payment = req.body;
-        //     const result = await paymentsCollection.insertOne(payment);
-        //     res.json({ message: "Payment successful", result });
-        // });
+        app.post("/payments", async (req, res) => {
+            const payment = req.body;
+            const result = await paymentsCollection.insertOne(payment);
+            res.json({ message: "Payment successful", result });
+        });
 
         //  Get payments by user email
         // app.get("/payments", async (req, res) => {
