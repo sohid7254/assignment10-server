@@ -64,12 +64,12 @@ async function run() {
             res.send(result);
         });
 
-        //  Get single bill
-        // app.get("/bills/:id", async (req, res) => {
-        //     const id = req.params.id;
-        //     const bill = await billsCollection.findOne({ _id: new ObjectId(id) });
-        //     res.json(bill);
-        // });
+        //  Get single bill details
+        app.get("/billsDetails/:id", async (req, res) => {
+            const id = req.params.id;
+            const bill = await billsCollection.findOne({ _id: new ObjectId(id) });
+            res.json(bill);
+        });
 
         // Add payment
         // app.post("/payments", async (req, res) => {
