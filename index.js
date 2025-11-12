@@ -67,7 +67,7 @@ async function run() {
         //  Get single bill details
         app.get("/billsDetails/:id", async (req, res) => {
             const id = req.params.id;
-            const bill = await billsCollection.findOne({ _id: new ObjectId(id) });
+            const bill = await billsCollection.findOne({ _id: new ObjectId(id) }, { $set: { status: "Active" } });
             res.json(bill);
         });
 
@@ -77,7 +77,16 @@ async function run() {
             const result = await paymentsCollection.insertOne(payment);
             res.json({ message: "Payment successful", result });
         });
-
+        // Post data on bd
+        app.post("/bills", async (req, res) => {
+            try {
+                const bill = req.body;
+                const result = await billsCollection.insertOne(bill);
+                res.json(result);
+            } catch (err) {
+                res.status(500).json({ error: err.message });
+            }
+        });
         //  Get payments by user email
         // app.get("/payments", async (req, res) => {
         //     const email = req.query.email;
