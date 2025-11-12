@@ -50,35 +50,35 @@ async function run() {
         });
 
         app.get('/latest-bills', async(req, res ) => {
-            const cursor = billsCollection.find().sort({date : -1}).limit(8)
+            const cursor = billsCollection.find().sort({date : -1}).limit(6)
             const result = await cursor.toArray();
             res.send(result)
         })
 
 
-        // ✅ Get all bills (with optional category filter)
-        // app.get("/bills", async (req, res) => {
-        //     const category = req.query.category;
-        //     const query = category ? { category } : {};
-        //     const bills = await billsCollection.find(query).toArray();
-        //     res.json(bills);
-        // });
+        // Get all bills 
+        app.get("/bills", async (req, res) => {
+            const category = req.query.category;
+            const query = category ? { category } : {};
+            const result = await billsCollection.find(query).toArray();
+            res.send(result);
+        });
 
-        // ✅ Get single bill
+        //  Get single bill
         // app.get("/bills/:id", async (req, res) => {
         //     const id = req.params.id;
         //     const bill = await billsCollection.findOne({ _id: new ObjectId(id) });
         //     res.json(bill);
         // });
 
-        // ✅ Add payment
+        // Add payment
         // app.post("/payments", async (req, res) => {
         //     const payment = req.body;
         //     const result = await paymentsCollection.insertOne(payment);
         //     res.json({ message: "Payment successful", result });
         // });
 
-        // ✅ Get payments by user email
+        //  Get payments by user email
         // app.get("/payments", async (req, res) => {
         //     const email = req.query.email;
         //     const query = email ? { email } : {};
@@ -86,7 +86,7 @@ async function run() {
         //     res.json(payments);
         // });
 
-        // ✅ Update payment
+        //  Update payment
         // app.put("/payments/:id", async (req, res) => {
         //     const id = req.params.id;
         //     const updated = req.body;
@@ -94,24 +94,24 @@ async function run() {
         //     res.json(result);
         // });
 
-        // ✅ Delete payment
+        //  Delete payment
         // app.delete("/payments/:id", async (req, res) => {
         //     const id = req.params.id;
         //     const result = await paymentsCollection.deleteOne({ _id: new ObjectId(id) });
         //     res.json({ message: "Payment deleted", result });
         // });
 
-        // ✅ Ping test
+        
         await client.db("admin").command({ ping: 1 });
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
     } finally {
-        // keep connection open for API usage
+        
     }
 }
 
 run().catch(console.dir);
 
-// ✅ Start server
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
