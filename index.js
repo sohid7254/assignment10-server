@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
-const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId, CursorTimeoutMode } = require("mongodb");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -29,8 +29,8 @@ async function run() {
     try {
         await client.connect();
 
-        const db = client.db("billmateDB");
-        // const billsCollection = db.collection("bills");
+        const db = client.db("assignment10");
+        const billsCollection = db.collection("bills");
         // const paymentsCollection = db.collection("payments");
         const usersCollection = db.collection("users");
 
@@ -48,6 +48,13 @@ async function run() {
                 res.send(result);
             }
         });
+
+        app.get('/latest-bills', async(req, res ) => {
+            const cursor = billsCollection.find().sort({date : -1}).limit(8)
+            const result = await cursor.toArray();
+            res.send(result)
+        })
+
 
         // ✅ Get all bills (with optional category filter)
         // app.get("/bills", async (req, res) => {
