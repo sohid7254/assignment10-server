@@ -104,11 +104,11 @@ async function run() {
         });
 
         //  Delete payment
-        // app.delete("/payments/:id", async (req, res) => {
-        //     const id = req.params.id;
-        //     const result = await paymentsCollection.deleteOne({ _id: new ObjectId(id) });
-        //     res.json({ message: "Payment deleted", result });
-        // });
+        app.delete("/payments/:id", async (req, res) => {
+            const id = req.params.id;
+            const result = await paymentsCollection.deleteOne({ _id: new ObjectId(id) });
+            res.json({ message: "Payment deleted", result });
+        });
 
         
         await client.db("admin").command({ ping: 1 });
