@@ -88,12 +88,12 @@ async function run() {
             }
         });
         //  Get payments by user email
-        // app.get("/payments", async (req, res) => {
-        //     const email = req.query.email;
-        //     const query = email ? { email } : {};
-        //     const payments = await paymentsCollection.find(query).toArray();
-        //     res.json(payments);
-        // });
+        app.get("/payments", async (req, res) => {
+            const email = req.query.email;
+            const query = email ? { email } : {};
+            const payments = await paymentsCollection.find(query).toArray();
+            res.json(payments);
+        });
 
         //  Update payment
         // app.put("/payments/:id", async (req, res) => {
