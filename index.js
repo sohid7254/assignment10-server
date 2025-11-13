@@ -67,7 +67,7 @@ async function run() {
         //  Get single bill details
         app.get("/billsDetails/:id", async (req, res) => {
             const id = req.params.id;
-            const bill = await billsCollection.findOne({ _id: new ObjectId(id) }, { $set: { status: "Active" } });
+            const bill = await billsCollection.findOne({ _id: id  })
             res.json(bill);
         });
 
