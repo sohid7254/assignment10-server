@@ -96,12 +96,12 @@ async function run() {
         });
 
         //  Update payment
-        // app.put("/payments/:id", async (req, res) => {
-        //     const id = req.params.id;
-        //     const updated = req.body;
-        //     const result = await paymentsCollection.updateOne({ _id: new ObjectId(id) }, { $set: updated });
-        //     res.json(result);
-        // });
+        app.put("/payments/:id", async (req, res) => {
+            const id = req.params.id;
+            const updated = req.body;
+            const result = await paymentsCollection.updateOne({ _id: new ObjectId(id) }, { $set: updated });
+            res.json(result);
+        });
 
         //  Delete payment
         // app.delete("/payments/:id", async (req, res) => {
