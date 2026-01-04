@@ -50,7 +50,7 @@ async function run() {
         });
 
         app.get('/latest-bills', async(req, res ) => {
-            const cursor = billsCollection.find().sort({date : -1}).limit(6)
+            const cursor = billsCollection.find().sort({date : -1}).limit(8)
             const result = await cursor.toArray();
             res.send(result)
         })
